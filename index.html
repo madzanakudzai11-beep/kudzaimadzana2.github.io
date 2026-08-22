@@ -144,6 +144,12 @@ h1{
 .greet.fading .greet-lang,.greet.fading .greet-word{opacity:0}
 .greet.fading .greet-word{transform:translateY(5px)}
 
+.intro{
+  margin:30px 0 0;max-width:58ch;
+  font-size:17.5px;line-height:1.68;color:var(--ink);
+}
+.intro::first-line{font-weight:600}
+
 /* ---------- section chrome ---------- */
 section{padding:64px 0;border-top:1px solid var(--line)}
 .sec-head{
@@ -315,7 +321,7 @@ footer{
   "greetings": [
     {
       "lang": "English",
-      "word": "Hi, I'm Kudzai.\nThank you for taking an interest in my work. I build and live by the principle of Kaizen a.k.a Continuous Improvement. It shapes how I build software and every other area of my life. I believe there is always a higher level, and reaching it takes patience, work, and a willingness to be a beginner again (something I'm still learning myself). The projects here are mine end to end, some built alone, some with a team. If you are building something interesting, do reach out. You can find out more about me below. Thank you!!"
+      "word": "Hello"
     },
     {
       "lang": "chiShona",
@@ -331,9 +337,9 @@ footer{
     }
   ],
   "about": [
-    "I am a Software Engineer who mainly builds web applications and chatbots, and I am most interested in the ones that have to work under real constraints such expensive mobile data, unreliable connectivity and users who speak mainly in the less supported languages.",
-    "I hold a BSc (Hons) in Software Engineering from Bindura University of Science Education, having graduated in 2026 with an upper second, and I have spent the last two years building full-stack systems for real users: A bookshop that takes online payments, A learning management system for language schools, and a NLP conversational agent for my former University.",
-    "Every project here is my own work, end to end design, build, deployment and, where it mattered, evaluation."
+    "I am a software engineer who builds web applications and chatbots, and I am most drawn to the ones that have to work under real constraints — expensive mobile data, unreliable connectivity, and users who speak languages the tooling barely supports.",
+    "I hold a BSc (Hons) in Software Engineering from Bindura University of Science Education, graduating in 2026 with an upper second. I have spent the last two years building full-stack systems for real users: a bookshop that takes online payments, a learning management system for language schools, and an NLP conversational agent for my university.",
+    "Every project here is my own work, end to end — design, build, deployment and, where it mattered, evaluation."
   ],
   "projects": [
     {
@@ -455,7 +461,8 @@ footer{
       "k": "Analysis",
       "v": "Requirements gathering · user stories · user journeys · gap analysis · technical documentation"
     }
-  ]
+  ],
+  "intro": "Hi, I'm Kudzai. Thank you for taking an interest in my work. I build and live by the principle of kaizen: continuous improvement. It shapes how I write software and every other area of my life. There is always a higher level, and reaching it takes patience, work, and a willingness to be a beginner again — something I am still learning myself. The projects here are mine end to end, some built alone and some with a team. If you are building something interesting, do reach out."
 }
 </script>
 
@@ -545,7 +552,7 @@ footer{
       '<a href="#about" data-optional>About</a>' +
       '<a href="#skills" data-optional>Skills</a>' +
       '<a href="#contact">Contact</a>' +
-      '<button class="ghost" type="button" id="themebtn"> Change Theme</button>' +
+      '<button class="ghost" type="button" id="themebtn">Theme</button>' +
       "</nav></div></header>";
 
     h += '<main><div class="wrap">';
@@ -558,6 +565,7 @@ footer{
       '<h1 data-field="name">' + esc(DATA.name) + "</h1>" +
       '<p class="role" data-field="role">' + esc(DATA.role) + "</p>" +
       '<div class="greet"><div class="greet-lang" id="glang"></div><div class="greet-word" id="gword"></div></div>' +
+      '<p class="intro" data-field="intro">' + esc(DATA.intro) + "</p>" +
       "</div></div>";
 
     /* work */
