@@ -125,30 +125,12 @@ h1{
   font-weight:400;font-size:clamp(17px,2.1vw,22px);
   color:var(--mute);margin:0 0 30px;letter-spacing:-.01em;
 }
-.greet{
-  display:flex;align-items:baseline;gap:16px;
-  padding-top:24px;border-top:1px solid var(--line);
-  min-height:58px;
-}
-.greet-lang{
-  font-family:"JetBrains Mono",ui-monospace,monospace;
-  font-size:11px;letter-spacing:.12em;text-transform:uppercase;
-  color:var(--accent);width:104px;flex:none;
-  transition:opacity .55s ease;
-}
-.greet-word{
-  font-family:"Bricolage Grotesque",system-ui,sans-serif;
-  font-weight:600;font-size:clamp(22px,3.4vw,32px);letter-spacing:-.02em;
-  transition:opacity .55s ease,transform .55s cubic-bezier(.2,.8,.2,1);
-}
-.greet.fading .greet-lang,.greet.fading .greet-word{opacity:0}
-.greet.fading .greet-word{transform:translateY(5px)}
 
 .intro{
-  margin:30px 0 0;max-width:58ch;
+  margin:0;max-width:58ch;
+  padding-top:30px;border-top:1px solid var(--line);
   font-size:17.5px;line-height:1.68;color:var(--ink);
 }
-.intro::first-line{font-weight:300}
 
 /* ---------- section chrome ---------- */
 section{padding:64px 0;border-top:1px solid var(--line)}
@@ -318,28 +300,10 @@ footer{
   "location": "Harare, Zimbabwe",
   "email": "madzanakudzai11@gmail.com",
   "phone": "+263 78 520 3263",
-  "greetings": [
-    {
-      "lang": "English",
-     
-    },
-    {
-      "lang": "chiShona",
-      "word": "Mhoro"
-    },
-    {
-      "lang": "isiNdebele",
-      "word": "Sawubona"
-    },
-    {
-      "lang": "Deutsch",
-      "word": "Hallo"
-    }
-  ],
   "about": [
-    "I am a software engineer who builds web applications and chatbots, and I am most drawn to the ones that have to work under real constraints, with the main ones expensive mobile data, unreliable connectivity, and users who speak languages the modern tooling barely supports.",
+    "I am a software engineer who builds web applications and chatbots, and I am most drawn to the ones that have to work under real constraints the main ones being expensive mobile data, unreliable connectivity, and users who speak languages that modern tooling barely supports.",
     "I hold a BSc (Hons) in Software Engineering from Bindura University of Science Education, graduating in 2026 with an upper second. I have spent the last two years building full-stack systems for real users: a bookshop that takes online payments, a learning management system for language schools, and an NLP conversational agent for my university.",
-    "Every project here is my own work, end to end, from design, build, deployment and, where it mattered, evaluation."
+    "Every project here is my own work, end to end, from design and build through to deployment and, where it mattered, evaluation."
   ],
   "projects": [
     {
@@ -564,8 +528,7 @@ footer{
       '<div class="eyebrow" data-field="location">' + esc(DATA.location) + "</div>" +
       '<h1 data-field="name">' + esc(DATA.name) + "</h1>" +
       '<p class="role" data-field="role">' + esc(DATA.role) + "</p>" +
-      '<div class="greet"><div class="greet-lang" id="glang"></div><div class="greet-word" id="gword"></div></div>' +
-      '<p class="intro" data-field="intro">' + esc(DATA.intro) + "</p>" +
+      '<p class="intro" data-field="intro">' + nl2br(DATA.intro) + "</p>" +
       "</div></div>";
 
     /* work */
@@ -605,7 +568,6 @@ footer{
   }
 
   /* ---------- behaviour ---------- */
-  var greetTimer = null;
 
   function wire() {
     var btn = document.getElementById("themebtn");
@@ -625,30 +587,6 @@ footer{
       fills.forEach(function (f) { io.observe(f); });
     }
 
-    /* greeting cycle */
-    if (greetTimer) clearInterval(greetTimer);
-    var gl = document.getElementById("glang"), gw = document.getElementById("gword");
-    var gwrap = gl ? gl.parentNode : null;
-    if (gl && gw && gwrap) {
-      var idx = 0;
-      var paint = function () {
-        var g = DATA.greetings[idx % DATA.greetings.length];
-        gl.textContent = g.lang;
-        gw.textContent = g.word;
-        idx++;
-      };
-      paint();
-      var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-      if (!reduce) {
-        greetTimer = setInterval(function () {
-          gwrap.classList.add("fading");
-          setTimeout(function () {
-            paint();
-            gwrap.classList.remove("fading");
-          }, 560);
-        }, 4200);
-      }
-    }
 
   }
 
